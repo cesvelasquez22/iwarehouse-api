@@ -7,6 +7,7 @@ const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
+const chalk = require('chalk');
 
 let sequelize;
 if (config.use_env_variable) {
@@ -33,5 +34,10 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+// sequelize.sync({force: true})
+//   .then(()=>{
+//       console.log(chalk.green.bold('Database and tables created!'));
+//   });
 
 module.exports = db;
