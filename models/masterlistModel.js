@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       gender: {
-        type: DataTypes.ENUM('Male', 'Female'),
+        type: DataTypes.STRING,
         allowNull: false,
       },
       place: {
@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   masterlistModel.associate = function (models) {
-
+    masterlistModel.hasMany(models.ph_jobMovements, { sourceKey: 'id', foreignKey: 'empId' });
   };
 
   return masterlistModel;

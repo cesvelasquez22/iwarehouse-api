@@ -7,8 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     },
   };
 
-  const officeUserModel = sequelize.define(
-    'officeUsers',
+  const oe_departmentModel = sequelize.define(
+    'oe_departments',
     {
       deptCode: {
         type: DataTypes.STRING,
@@ -23,7 +23,12 @@ module.exports = (sequelize, DataTypes) => {
     modelOptions
   );
 
-  officeUserModel.associate = function (models) {};
+  oe_departmentModel.associate = function (models) {
+    oe_departmentModel.hasMany(models.oe_officeUsers, {
+      sourcekey: 'id',
+      foreignKey: 'departmentId',
+    });
+  };
 
-  return officeUserModel;
+  return oe_departmentModel;
 };
