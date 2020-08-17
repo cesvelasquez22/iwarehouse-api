@@ -12,7 +12,7 @@ module.exports = (sequelize, Datatypes) => {
     {
       serial: {
         type: Datatypes.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       brand: {
         type: Datatypes.STRING,
@@ -28,7 +28,7 @@ module.exports = (sequelize, Datatypes) => {
       },
       inventoryCode: {
         type: Datatypes.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       processorType: {
         type: Datatypes.STRING,
