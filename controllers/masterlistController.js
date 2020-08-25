@@ -14,7 +14,8 @@ masterController.createNewEmployee = (req, res) => {
     !obj.gender ||
     !obj.place ||
     !obj.addressLine1 ||
-    !obj.phone1
+    !obj.phone1 ||
+    !obj.status
   ) {
     res.json({
       message: 'Faltan campos requeridos.',

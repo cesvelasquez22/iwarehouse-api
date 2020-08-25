@@ -18,12 +18,20 @@ module.exports = (sequelize, Datatypes) => {
         type: Datatypes.INTEGER,
         allowNull: false,
       },
-      ipAddress: {
+      officeUserId: {
+        type: Datatypes.INTEGER,
+        allowNull: false,
+      },
+      computerName: {
         type: Datatypes.STRING,
         allowNull: true,
       },
-      officeUserId: {
-        type: Datatypes.INTEGER,
+      macAddress: {
+        type: Datatypes.STRING,
+        allowNull: true,
+      },
+      ipAddress: {
+        type: Datatypes.STRING,
         allowNull: true,
       },
     },

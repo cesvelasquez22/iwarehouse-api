@@ -22,10 +22,6 @@ module.exports = (sequelize, Datatypes) => {
         type: Datatypes.STRING,
         allowNull: false,
       },
-      macAddress: {
-        type: Datatypes.STRING,
-        allowNull: true,
-      },
       inventoryCode: {
         type: Datatypes.STRING,
         allowNull: false,

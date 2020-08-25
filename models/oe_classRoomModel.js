@@ -26,6 +26,14 @@ module.exports = (sequelize, Datatypes) => {
         type: Datatypes.INTEGER,
         allowNull: false,
       },
+      computerName: {
+        type: Datatypes.STRING,
+        allowNull: true,
+      },
+      macAddress: {
+        type: Datatypes.STRING,
+        allowNull: true,
+      },
       ipAddress: {
         type: Datatypes.STRING,
         allowNull: true,

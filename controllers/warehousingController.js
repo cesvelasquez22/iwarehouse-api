@@ -19,8 +19,8 @@ warehousingController.createCase = (req, res) => {
           inventoryCode: obj.inventoryCode,
         },
       })
-      .then((isNew) => {
-        if (!isNew) {
+      .then((exists) => {
+        if (!exists) {
           db.sync().then(() => {
             return cases.create(obj).then(() => {
               res.status(201).json({
@@ -35,7 +35,6 @@ warehousingController.createCase = (req, res) => {
         }
       })
       .catch((err) => {
-        console.log(err);
         res.status(403).json({
           message:
             'Ha ocurrido un error inesperado, contacte su administrador.',
@@ -164,8 +163,8 @@ warehousingController.createMonitor = (req, res) => {
           inventoryCode: obj.inventoryCode,
         },
       })
-      .then((isNew) => {
-        if (!isNew) {
+      .then((exists) => {
+        if (!exists) {
           db.sync().then(() => {
             return monitor.create(obj).then(() => {
               res.status(201).json({
@@ -294,8 +293,8 @@ warehousingController.createProjector = (req, res) => {
           inventoryCode: obj.inventoryCode,
         },
       })
-      .then((isNew) => {
-        if (!isNew) {
+      .then((exists) => {
+        if (!exists) {
           db.sync().then(() => {
             return projector.create(obj).then(() => {
               res.status(201).json({

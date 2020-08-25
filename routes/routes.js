@@ -5,6 +5,8 @@ const strategy = require('../lib/jwt');
 const warehousingController = require('../controllers/warehousingController');
 const masterController =  require('../controllers/masterlistController');
 const AuthController = require('../controllers/authController');
+const jobsController = require('../controllers/jobsController');
+const officeEquipmentController = require('../controllers/officeEquipmentController');
 
 const router = express.Router();
 
@@ -21,6 +23,7 @@ router.get('/employees/:id', masterController.getEmployee);
 router.post('/employees', masterController.createNewEmployee);
 router.put('/employees/:id', masterController.updateEmployeeInformation);
 // Jobs
+router.get('/jobs', jobsController.getEmployeeJobs);
 
 // Warehousing
 // Cases
@@ -38,6 +41,22 @@ router.get('/projectors', warehousingController.getProjectors);
 router.get('/projectors/:id', warehousingController.getProjector);
 router.post('/projectors', warehousingController.createProjector);
 router.put('/projectors/:id', warehousingController.updateProjector);
+
+// Office Equipment
+// Departments
+router.get('/depts', officeEquipmentController.getDepartments);
+router.get('/depts/:id', officeEquipmentController.getDepartment);
+router.post('/depts', officeEquipmentController.createDepartment);
+router.put('depts/:id', officeEquipmentController.updateDepartment);
+// Office Users
+router.get('/officeUsers', officeEquipmentController.getOfficeUsers);
+router.get('/officeusers/:id', officeEquipmentController.getOfficeUser);
+router.post('/officeUsers', officeEquipmentController.createOfficeUser);
+router.put('/officeUsers/:id', officeEquipmentController.updateOfficeUser);
+// Offices
+router.get('/offices', officeEquipmentController.getOffices);
+router.get('/offices/:id', officeEquipmentController.getOffice);
+router.post('/offices', officeEquipmentController.createOffice);
 
 // Auth
 router.post('/user', AuthController.createNewUser);
