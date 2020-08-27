@@ -323,6 +323,7 @@ officeEquipmentController.getOffices = (req, res) => {
         'monitorId',
         'officeUserId',
         'computerName',
+        'macAddress',
         'ipAddress',
       ],
       include: [
@@ -389,6 +390,7 @@ officeEquipmentController.getOffice = (req, res) => {
         'monitorId',
         'officeUserId',
         'computerName',
+        'macAddress',
         'ipAddress',
       ],
       include: [
@@ -441,5 +443,44 @@ officeEquipmentController.getOffice = (req, res) => {
       });
     });
 };
+
+officeEquipmentController.updateOffice = (req, res) => {
+  let id = parseInt(req.params.id, 10);
+
+  let data = req.body.data;
+
+  let object = {
+    caseId: data.caseId,
+    monitorId: data.monitorId,
+    officeUserId: data.officeUserId,
+    computerName: data.computerName,
+    macAddress: data.macAddress,
+    ipAddress: data.ipAddress,
+    extNumber: data.extNumber,
+  };
+
+  offices
+    .update(object, {
+      where: {
+        id: id,
+      },
+    })
+    .then((result) => {
+      res.status(200).json({
+        message: res.json({
+          message: 'La informacion fue exitosamente actualizada.',
+        }),
+      });
+    })
+    .catch((err) => {
+      res.status(406).json({
+        message: res.json({
+          message:
+            'Hubo un error inesperado por favor contactar su administrador.',
+        }),
+      });
+    });
+};
+
 
 module.exports = officeEquipmentController;

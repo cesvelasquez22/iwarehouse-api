@@ -57,6 +57,7 @@ router.put('/officeUsers/:id', officeEquipmentController.updateOfficeUser);
 router.get('/offices', officeEquipmentController.getOffices);
 router.get('/offices/:id', officeEquipmentController.getOffice);
 router.post('/offices', officeEquipmentController.createOffice);
+router.put('/offices/:id', officeEquipmentController.updateOffice);
 
 // Auth
 router.post('/user', AuthController.createNewUser);

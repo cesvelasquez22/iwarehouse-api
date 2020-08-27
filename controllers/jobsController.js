@@ -39,7 +39,7 @@ jobsController.getEmployeeJobs = (req, res) => {
   masterlists
     .findAll({
       where: req.query,
-      attributes: ['id', 'firstName', 'lastName'],
+      attributes: ['id', 'altId', 'firstName', 'lastName'],
       include: [
         {
           //limit: 1,
@@ -63,7 +63,7 @@ jobsController.getEmployeeJobs = (req, res) => {
         return Object.assign(
           {},
           {
-            uid: emp.id,
+            altId: emp.altId,
             name: emp.firstName + ' ' + emp.lastName,
             job: emp.ph_jobMovements.map((mov) => {
               return Object.assign(
