@@ -158,6 +158,7 @@ warehousingController.createMonitor = (req, res) => {
     monitor
       .findOne({
         where: {
+          serial: obj.serial,
           inventoryCode: obj.inventoryCode,
         },
       })
@@ -173,7 +174,7 @@ warehousingController.createMonitor = (req, res) => {
         } else {
           res.status(400).json({
             message:
-              'Ya existe este registro! Intenta con un nombre diferente.',
+              'Ya existe este registro! Intenta con uno diferente.',
           });
         }
       })
