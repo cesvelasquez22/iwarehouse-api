@@ -561,10 +561,36 @@ officeEquipmentController.getClassroom = (req, res) => {
         },
       ],
     })
-    .then((data) => {
-      res.json(data);
+    .then((equipment) => {
+      console.log(equipment.dataValues);
+      return res.json(
+        Object.assign(
+          {},
+          {
+            classRoomId: equipment.altId,
+            computerName: equipment.computerName,
+            macAddress: equipment.macAddress,
+            ipAddress: equipment.ipAddress,
+            equipment: [
+              equipment.we_case.dataValues,
+              equipment.we_monitor.dataValues,
+              equipment.we_projector.dataValues,
+              // {
+              //   case: equipment.we_case.dataValues
+              // },
+              // {
+              //   monitor: equipment.we_monitor.dataValues
+              // },
+              // {
+              //   projector: equipment.we_projector.dataValues
+              // },
+            ],
+          }
+        )
+      );
     })
     .catch((err) => {
+      console.log(err);
       res.json({
         message:
           'Hubo un error inesperado por favor contactar su administrador.',
@@ -610,10 +636,28 @@ officeEquipmentController.getClassrooms = (req, res) => {
         },
       ],
     })
-    .then((data) => {
-      res.json(data);
+    .then((equipment) => {
+      console.log(equipment);
+      const resObj = equipment.map((newObj) => {
+        return Object.assign(
+          {},
+          {
+            classRoomId: newObj.altId,
+            computerName: newObj.computerName,
+            macAddress: newObj.macAddress,
+            ipAddress: newObj.ipAddress,
+            equipment: [
+              newObj.we_case.dataValues,
+              newObj.we_monitor.dataValues,
+              newObj.we_projector.dataValues,
+            ],
+          }
+        );
+      });
+      res.json(resObj);
     })
     .catch((err) => {
+      console.log(err);
       res.json({
         message:
           'Hubo un error inesperado por favor contactar su administrador.',
@@ -836,6 +880,5 @@ officeEquipmentController.updateLab = (req, res) => {
       });
     });
 };
-
 
 module.exports = officeEquipmentController;

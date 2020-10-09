@@ -95,7 +95,26 @@ warehousingController.getCases = (req, res) => {
       ],
     })
     .then((data) => {
-      res.json(data);
+      const resObj = data.map((list) => {
+        return Object.assign(
+          {},
+          {
+            id: list.id,
+            serial: list.serial,
+            brand: list.brand,
+            model: list.model,
+            inventoryCode: list.inventoryCode,
+            components: [
+                list.processorType,
+                list.ramMemory,
+                list.diskSpace,
+            ],
+            guarantee: list.guarantee,
+            equipmentStatus: list.equipmentStatus,
+          }
+        );
+      });
+      res.json(resObj);
     })
     .catch((err) => {
       res.json({
@@ -173,8 +192,7 @@ warehousingController.createMonitor = (req, res) => {
           });
         } else {
           res.status(400).json({
-            message:
-              'Ya existe este registro! Intenta con uno diferente.',
+            message: 'Ya existe este registro! Intenta con uno diferente.',
           });
         }
       })
@@ -318,97 +336,97 @@ warehousingController.createProjector = (req, res) => {
 };
 
 warehousingController.getProjector = (req, res) => {
-    let id = req.params.id;
-  
-    projector
-      .findOne({
-        where: {
-          id: id,
-        },
-        attributes: [
-          'id',
-          'serial',
-          'brand',
-          'model',
-          'inventoryCode',
-          'guarantee',
-          'equipmentStatus',
-          'notes',
-        ],
-      })
-      .then((data) => {
-        res.json(data);
-      })
-      .catch((error) => {
-        res.json({
+  let id = req.params.id;
+
+  projector
+    .findOne({
+      where: {
+        id: id,
+      },
+      attributes: [
+        'id',
+        'serial',
+        'brand',
+        'model',
+        'inventoryCode',
+        'guarantee',
+        'equipmentStatus',
+        'notes',
+      ],
+    })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((error) => {
+      res.json({
+        message:
+          'Hubo un error inesperado por favor contactar su administrador.',
+      });
+    });
+};
+
+warehousingController.getProjectors = (req, res) => {
+  projector
+    .findAll({
+      where: req.query,
+      attributes: [
+        'id',
+        'serial',
+        'brand',
+        'model',
+        'inventoryCode',
+        'guarantee',
+        'equipmentStatus',
+        'notes',
+      ],
+    })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      res.json({
+        message:
+          'Hubo un error inesperado por favor contactar su administrador.',
+      });
+    });
+};
+
+warehousingController.updateProjector = (req, res) => {
+  let id = parseInt(req.params.id, 10);
+
+  let data = req.body.data;
+
+  let object = {
+    serial: data.serial,
+    brand: data.brand,
+    model: data.model,
+    inventoryCode: data.inventoryCode,
+    guarantee: data.guarantee,
+    equipmentStatus: data.equipmentStatus,
+    notes: data.notes,
+  };
+
+  projector
+    .update(object, {
+      where: {
+        id: id,
+      },
+    })
+    .then((result) => {
+      res.status(200).json({
+        message: res.json({
+          message: 'La informacion fue exitosamente actualizada.',
+        }),
+      });
+    })
+    .catch((err) => {
+      res.status(406).json({
+        message: res.json({
           message:
             'Hubo un error inesperado por favor contactar su administrador.',
-        });
+        }),
       });
-  };
-  
-  warehousingController.getProjectors = (req, res) => {
-    projector
-      .findAll({
-        where: req.query,
-        attributes: [
-          'id',
-          'serial',
-          'brand',
-          'model',
-          'inventoryCode',
-          'guarantee',
-          'equipmentStatus',
-          'notes',
-        ],
-      })
-      .then((data) => {
-        res.json(data);
-      })
-      .catch((err) => {
-        res.json({
-          message:
-            'Hubo un error inesperado por favor contactar su administrador.',
-        });
-      });
-  };
-  
-  warehousingController.updateProjector = (req, res) => {
-    let id = parseInt(req.params.id, 10);
-  
-    let data = req.body.data;
-  
-    let object = {
-      serial: data.serial,
-      brand: data.brand,
-      model: data.model,
-      inventoryCode: data.inventoryCode,
-      guarantee: data.guarantee,
-      equipmentStatus: data.equipmentStatus,
-      notes: data.notes,
-    };
-  
-    projector
-      .update(object, {
-        where: {
-          id: id,
-        },
-      })
-      .then((result) => {
-        res.status(200).json({
-          message: res.json({
-            message: 'La informacion fue exitosamente actualizada.',
-          }),
-        });
-      })
-      .catch((err) => {
-        res.status(406).json({
-          message: res.json({
-            message:
-              'Hubo un error inesperado por favor contactar su administrador.',
-          }),
-        });
-      });
-  };
+    });
+};
 
 module.exports = warehousingController;
