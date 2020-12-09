@@ -572,12 +572,9 @@ officeEquipmentController.getClassroom = (req, res) => {
             macAddress: equipment.macAddress,
             ipAddress: equipment.ipAddress,
             equipment: [
-              equipment.we_case.dataValues,
-              equipment.we_monitor.dataValues,
-              equipment.we_projector.dataValues,
-              // {
-              //   case: equipment.we_case.dataValues
-              // },
+                equipment.we_case.dataValues,
+                equipment.we_monitor.dataValues,
+                equipment.we_projector.dataValues,
               // {
               //   monitor: equipment.we_monitor.dataValues
               // },
@@ -647,9 +644,9 @@ officeEquipmentController.getClassrooms = (req, res) => {
             macAddress: newObj.macAddress,
             ipAddress: newObj.ipAddress,
             equipment: [
-              newObj.we_case.dataValues,
-              newObj.we_monitor.dataValues,
-              newObj.we_projector.dataValues,
+                newObj.we_case.dataValues,
+                newObj.we_monitor.dataValues,
+                newObj.we_projector.dataValues,
             ],
           }
         );
