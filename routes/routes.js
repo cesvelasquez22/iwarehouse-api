@@ -7,6 +7,8 @@ const masterController = require('../controllers/masterlistController');
 const AuthController = require('../controllers/authController');
 const jobsController = require('../controllers/jobsController');
 const officeEquipmentController = require('../controllers/officeEquipmentController');
+const userController = require('../controllers/userController');
+const roleController = require('../controllers/roleController');
 
 const router = express.Router();
 
@@ -16,205 +18,15 @@ router.get('/', function (req, res) {
 
 passport.use(strategy.getStrategy());
 
-// Employees
-// Masterlist
-router.get(
-  '/employees',
-  passport.authenticate('jwt', { session: false }),
-  masterController.getAllEmployees
-);
-router.get(
-  '/employees/:id',
-  passport.authenticate('jwt', { session: false }),
-  masterController.getEmployee
-);
-router.post(
-  '/employees',
-  passport.authenticate('jwt', { session: false }),
-  masterController.createNewEmployee
-);
-router.put(
-  '/employees/:id',
-  passport.authenticate('jwt', { session: false }),
-  masterController.updateEmployeeInformation
-);
-// Jobs
-router.get('/jobs', jobsController.getEmployeeJobs);
+// Users
+router.get('/users', userController.getUsers);
 
-// Warehousing
-// Cases
-router.get(
-  '/cases',
-  passport.authenticate('jwt', { session: false }),
-  warehousingController.getCases
-);
-router.get(
-  '/cases/:id',
-  passport.authenticate('jwt', { session: false }),
-  warehousingController.getCase
-);
-router.post(
-  '/cases',
-  passport.authenticate('jwt', { session: false }),
-  warehousingController.createCase
-);
-router.put(
-  '/cases/:id',
-  passport.authenticate('jwt', { session: false }),
-  warehousingController.updateCase
-);
-// Monitors
-router.get(
-  '/monitors',
-  passport.authenticate('jwt', { session: false }),
-  warehousingController.getMonitors
-);
-router.get(
-  '/monitors/:id',
-  passport.authenticate('jwt', { session: false }),
-  warehousingController.getMonitor
-);
-router.post(
-  '/monitors',
-  passport.authenticate('jwt', { session: false }),
-  warehousingController.createMonitor
-);
-router.put(
-  '/monitors/:id',
-  passport.authenticate('jwt', { session: false }),
-  warehousingController.updateMonitor
-);
-// Projectors
-router.get(
-  '/projectors',
-  passport.authenticate('jwt', { session: false }),
-  warehousingController.getProjectors
-);
-router.get(
-  '/projectors/:id',
-  passport.authenticate('jwt', { session: false }),
-  warehousingController.getProjector
-);
-router.post(
-  '/projectors',
-  passport.authenticate('jwt', { session: false }),
-  warehousingController.createProjector
-);
-router.put(
-  '/projectors/:id',
-  passport.authenticate('jwt', { session: false }),
-  warehousingController.updateProjector
-);
-
-// Office Equipment
-// Departments
-router.get(
-  '/depts',
-  passport.authenticate('jwt', { session: false }),
-  officeEquipmentController.getDepartments
-);
-router.get(
-  '/depts/:id',
-  passport.authenticate('jwt', { session: false }),
-  officeEquipmentController.getDepartment
-);
-router.post(
-  '/depts',
-  passport.authenticate('jwt', { session: false }),
-  officeEquipmentController.createDepartment
-);
-router.put(
-  'depts/:id',
-  passport.authenticate('jwt', { session: false }),
-  officeEquipmentController.updateDepartment
-);
-// Office Users
-router.get(
-  '/officeUsers',
-  passport.authenticate('jwt', { session: false }),
-  officeEquipmentController.getOfficeUsers
-);
-router.get(
-  '/officeusers/:id',
-  passport.authenticate('jwt', { session: false }),
-  officeEquipmentController.getOfficeUser
-);
-router.post(
-  '/officeUsers',
-  passport.authenticate('jwt', { session: false }),
-  officeEquipmentController.createOfficeUser
-);
-router.put(
-  '/officeUsers/:id',
-  passport.authenticate('jwt', { session: false }),
-  officeEquipmentController.updateOfficeUser
-);
-// Offices
-router.get(
-  '/offices',
-  passport.authenticate('jwt', { session: false }),
-  officeEquipmentController.getOffices
-);
-router.get(
-  '/offices/:id',
-  passport.authenticate('jwt', { session: false }),
-  officeEquipmentController.getOffice
-);
-router.post(
-  '/offices',
-  passport.authenticate('jwt', { session: false }),
-  officeEquipmentController.createOffice
-);
-router.put(
-  '/offices/:id',
-  passport.authenticate('jwt', { session: false }),
-  officeEquipmentController.updateOffice
-);
-// Classrooms
-router.get(
-  '/rooms',
-  passport.authenticate('jwt', { session: false }),
-  officeEquipmentController.getClassrooms
-);
-router.get(
-  '/rooms/:id',
-  passport.authenticate('jwt', { session: false }),
-  officeEquipmentController.getClassroom
-);
-router.post(
-  '/rooms',
-  passport.authenticate('jwt', { session: false }),
-  officeEquipmentController.createClassroom
-);
-router.put(
-  '/rooms/:id',
-  passport.authenticate('jwt', { session: false }),
-  officeEquipmentController.updateClassroom
-);
-// Labs
-router.get(
-  '/labs',
-  passport.authenticate('jwt', { session: false }),
-  officeEquipmentController.getLabs
-);
-router.get(
-  '/labs/:id',
-  passport.authenticate('jwt', { session: false }),
-  officeEquipmentController.getLab
-);
-router.post(
-  '/labs',
-  passport.authenticate('jwt', { session: false }),
-  officeEquipmentController.createLab
-);
-router.put(
-  '/labs/:id',
-  passport.authenticate('jwt', { session: false }),
-  officeEquipmentController.updateLab
-);
+// Roles
+// router.get('/roles', passport.authenticate('jwt', { session: false }), roleController.getAllRoles);
+router.get('/roles', roleController.getAllRoles);
 
 // Auth
-router.post('/user', AuthController.createNewUser);
+router.post('/auth/create', AuthController.createNewUser);
 router.post('/auth', AuthController.authenticateUser);
 // router.get('/user', AuthController.getUserByJwt);
 
